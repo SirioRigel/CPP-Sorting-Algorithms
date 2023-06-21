@@ -8,12 +8,15 @@
 using namespace std;
 
 /// <summary>
-/// This algorithm works very well in low size arrays with a time complexity of O(n). However given the nature of the algorithm
-/// the worst time complexity is O(n^2) as the avarge number of comparison and swaps generally is O(n^2).
+/// The bubble sort algorithm is a simple algorithm that works by checking if every element in the list is 
+/// greater than the previous one; as such it works very well in low size arrays with a time complexity of O(n).
+///  However given the nature of the algorithm the worst time complexity is O(n^2) as the avarge number of comparison 
+/// and swaps generally is O(n^2).
 /// </summary>
 /// <param name="Array of ints"></param>
 /// <param name="Size of the array"></param>
 void bubbleSort(int* arr, int size) {
+    if (size < 2) return;
     bool swapped;
     do {
         swapped = false;
@@ -29,13 +32,12 @@ void bubbleSort(int* arr, int size) {
 /// <summary>
 /// The quicksort is a very powerful (and quick!) algorithm with an avarage time complexity of O(n log(n))
 /// however, given that it works by splitting the data in different "partitions", in the worst case scenario
-/// has a time complexity of O(n^2). This algorithm can be used even with large amount of elements
+/// has a time complexity of O(n^2). This algorithm can even be used with large amount of elements
 /// </summary>
 /// <param name="Array of ints"></param>
 /// <param name="Size of the array"></param>
 void quicksort(int* arr, int size) {
-    if (size <= 1)
-        return;
+    if (size < 2) return;
 
     int pivot = size - 1;
     int index = 0;
@@ -105,8 +107,8 @@ int* quickPartition(int max, bool right, int size, int* arr) {
 
 /// <summary>
 /// The mergeSort is a divide-and-conquer type of algorithm which, just like the quickSort, creates
-/// partitions of a base array and sorts them individually. Its time complexity is very low at O(n log (n)) but
-/// it scales quickly with n.
+/// partitions of a base array and sorts them individually; then it "merges" them together. 
+/// Its time complexity is very low at O(n log (n)) but it scales quickly with n.
 /// </summary>
 /// <param name="Array of ints"></param>
 /// <param name="Initial index"></param>
@@ -172,7 +174,8 @@ void merge(int* arr, int iIndex, int midIndex, int fIndex) {
 }
 
 /// <summary>
-/// The insertion sort is a simple sorting algorithm that compares the adjacent values of an array. 
+/// The insertion sort is a simple sorting algorithm that compares the adjacent values of an array and inserts their value into
+/// its correct place. 
 /// Altough it's simple to implement, it has an avarage time complexity of O(n^2) which makes it very slow
 /// for large data sets, but still pretty fast compared to other "quadratic" algorithms like bubble sort.
 /// </summary>
@@ -187,4 +190,36 @@ void insertionSort(int* arr, int size) {
             j--;
         }
     }
+}
+
+/// <summary>
+/// The selection sort is a very slow and inefficient sorting algorithm when it comes to large lists having 
+/// an avarage time complexity of O(n^2). It works by dividing the list into two "sub arrays" within the list itself
+/// : the first will be the final list, while the second is full of unsorted items.
+/// Its major upside is the restriced use of memory compared to other sorting algorithms.
+/// </summary>
+/// <param name="arr"></param>
+/// <param name="size"></param>
+void selectionSort(int* arr, int size) {
+    if (size < 2) return;
+    for (int i = 0; i < size - 1; i++) {
+        int jmin = i;
+        for (int j = i + 1; j < size; j++) {
+            if (arr[j] > arr[jmin]) {
+                jmin = j;
+            }
+        }
+        if (jmin != i) {
+            swap(arr[i], arr[jmin]);
+        }
+    }
+}
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="arr"></param>
+/// <param name="size"></param>
+void blockSort(int* arr, int size) {
+
 }
