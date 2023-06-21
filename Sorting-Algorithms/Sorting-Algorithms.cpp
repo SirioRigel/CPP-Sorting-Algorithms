@@ -8,8 +8,8 @@
 using namespace std;
 
 /// <summary>
-/// This algorithms works very well in low size arrays as the time complexity is O(n) while the
-/// the worst time complexity can even be O(n^2) as the avarge number of comparison and swaps is O(n^2).
+/// This algorithm works very well in low size arrays since the time complexity is O(n); however the
+/// the worst time complexity can even be O(n^2) as the avarge number of comparison and swaps generally is O(n^2).
 /// </summary>
 /// <param name="Array of ints"></param>
 /// <param name="Size of the array"></param>
@@ -35,7 +35,7 @@ void bubbleSort(int* arr, int size) {
 /// <param name="Size of the array"></param>
 void quicksort(int* arr, int size) {
     if (size <= 1)
-        return; // Base case: array of size 0 or 1 is already sorted
+        return;
 
     int pivot = size - 1;
     int index = 0;
@@ -72,7 +72,14 @@ void quicksort(int* arr, int size) {
         }
     }
 }
-
+/// <summary>
+/// Used to create quickSort partitions to be sorted
+/// </summary>
+/// <param name="max"></param>
+/// <param name="right"></param>
+/// <param name="size"></param>
+/// <param name="arr"></param>
+/// <returns></returns>
 int* quickPartition(int max, bool right, int size, int* arr) {
     if (right) {
         int* returned = new int[max];
@@ -94,4 +101,64 @@ int* quickPartition(int max, bool right, int size, int* arr) {
         }
         return returned;
     }
+}
+
+/// <summary>
+/// The mergeSort is a divide-and-conquer type of algorithm that just like the quickSort it creates
+/// partitions of a base array and sorts them individually. Its time complexity is very low at O(n log (n))
+/// </summary>
+/// <param name="arr"></param>
+/// <param name="iIndex"></param>
+/// <param name="fIndex"></param>
+void mergeSort(int* arr, int iIndex, int fIndex) {
+    if (iIndex < fIndex) {
+        int midIndex = iIndex + (fIndex - iIndex) / 2;
+        mergeSort(arr, iIndex, midIndex);
+        mergeSort(arr, midIndex + 1, fIndex);
+        merge(arr, iIndex, midIndex, fIndex);
+    }
+}
+
+void merge(int* arr, int iIndex, int midIndex, int fIndex) {
+    int size1 = midIndex - iIndex + 1;
+    int size2 = fIndex - midIndex;
+
+    int* leftArr = new int[size1];
+    int* rightArr = new int[size2];
+
+    for (int i = 0; i < size1; ++i)
+        leftArr[i] = arr[iIndex + i];
+    for (int j = 0; j < size2; ++j)
+        rightArr[j] = arr[midIndex + 1 + j];
+
+    int i = 0;
+    int j = 0;  
+    int k = iIndex;
+
+    while (i < size1 && j < size2) {
+        if (leftArr[i] <= rightArr[j]) {
+            arr[k] = leftArr[i];
+            ++i;
+        }
+        else {
+            arr[k] = rightArr[j];
+            ++j;
+        }
+        ++k;
+    }
+
+    while (i < size1) {
+        arr[k] = leftArr[i];
+        ++i;
+        ++k;
+    }
+
+    while (j < size2) {
+        arr[k] = rightArr[j];
+        ++j;
+        ++k;
+    }
+
+    delete[] leftArr;
+    delete[] rightArr;
 }
