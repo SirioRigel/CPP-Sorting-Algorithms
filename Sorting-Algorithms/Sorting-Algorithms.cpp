@@ -170,3 +170,21 @@ void merge(int* arr, int iIndex, int midIndex, int fIndex) {
     delete[] leftArr;
     delete[] rightArr;
 }
+
+/// <summary>
+/// The insertion sort is a simple sorting algorithm that compares the adjacent values of an array. 
+/// Altough it's simple to implement, it has an avarage time complexity of O(n^2) which makes it very slow
+/// for large data sets, but still pretty fast compared to other "quadratic" algorithms like bubble sort.
+/// </summary>
+/// <param name="Array of ints"></param>
+/// <param name="Size of the array"></param>
+void insertionSort(int* arr, int size) {
+    if (size < 2) return;
+    for (int i = 1; i < size; i++) {
+        int j = i;
+        while (j > 0 && arr[j - 1] > arr[j]) {
+            swap(arr[j], arr[j - 1]);
+            j--;
+        }
+    }
+}
