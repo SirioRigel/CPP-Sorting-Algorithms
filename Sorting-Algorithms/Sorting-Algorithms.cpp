@@ -8,8 +8,8 @@
 using namespace std;
 
 /// <summary>
-/// This algorithm works very well in low size arrays since the time complexity is O(n); however the
-/// the worst time complexity can even be O(n^2) as the avarge number of comparison and swaps generally is O(n^2).
+/// This algorithm works very well in low size arrays with a time complexity of O(n). However given the nature of the algorithm
+/// the worst time complexity is O(n^2) as the avarge number of comparison and swaps generally is O(n^2).
 /// </summary>
 /// <param name="Array of ints"></param>
 /// <param name="Size of the array"></param>
@@ -27,9 +27,9 @@ void bubbleSort(int* arr, int size) {
 }
 
 /// <summary>
-/// The quicksort is a very powerful (and quick!) (yet complicated!) algorithm with an avarage time complexity of O(n log(n))
-/// however, given that it works by splitting the data in different "partitions", it may even
-/// have a time complexity of O(n^2). This algorithm can be used even with large amount of elements
+/// The quicksort is a very powerful (and quick!) algorithm with an avarage time complexity of O(n log(n))
+/// however, given that it works by splitting the data in different "partitions", in the worst case scenario
+/// has a time complexity of O(n^2). This algorithm can be used even with large amount of elements
 /// </summary>
 /// <param name="Array of ints"></param>
 /// <param name="Size of the array"></param>
@@ -104,12 +104,13 @@ int* quickPartition(int max, bool right, int size, int* arr) {
 }
 
 /// <summary>
-/// The mergeSort is a divide-and-conquer type of algorithm that just like the quickSort it creates
-/// partitions of a base array and sorts them individually. Its time complexity is very low at O(n log (n))
+/// The mergeSort is a divide-and-conquer type of algorithm which, just like the quickSort, creates
+/// partitions of a base array and sorts them individually. Its time complexity is very low at O(n log (n)) but
+/// it scales quickly with n.
 /// </summary>
-/// <param name="arr"></param>
-/// <param name="iIndex"></param>
-/// <param name="fIndex"></param>
+/// <param name="Array of ints"></param>
+/// <param name="Initial index"></param>
+/// <param name="Final index"></param>
 void mergeSort(int* arr, int iIndex, int fIndex) {
     if (iIndex < fIndex) {
         int midIndex = iIndex + (fIndex - iIndex) / 2;
@@ -119,6 +120,13 @@ void mergeSort(int* arr, int iIndex, int fIndex) {
     }
 }
 
+/// <summary>
+/// Used to merge the little arrays into the initial array in Merge sort
+/// </summary>
+/// <param name="arr"></param>
+/// <param name="iIndex"></param>
+/// <param name="midIndex"></param>
+/// <param name="fIndex"></param>
 void merge(int* arr, int iIndex, int midIndex, int fIndex) {
     int size1 = midIndex - iIndex + 1;
     int size2 = fIndex - midIndex;
