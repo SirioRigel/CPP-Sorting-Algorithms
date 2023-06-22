@@ -216,6 +216,30 @@ void selectionSort(int* arr, int size) {
 }
 
 /// <summary>
+/// The shell sort is an interesting algorithm as it is very similar to an insertion sort but it uses "gaps" which are basically
+/// integeres that make the element of the unsorted array jump to the beginning of the array itself. The time complexity
+/// is pretty difficult to analize but it depends on the gaps used in the sorting algorithm itself. In this I've used Ciura's
+/// sequence, which is currently the best known sequence of gaps for shell sort, even if other sequences might work better with very large arrays.
+/// </summary>
+/// <param name="Array of ints"></param>
+/// <param name="Size of the array"></param>
+void shellSort(int* arr, int size) {
+    if (size < 2) return;
+    int gaps[] = { 1750, 701, 301, 132, 57, 23, 10, 4, 1};
+    for (int i = 0; i < 9; i++) {
+        int gap = gaps[i];
+        for (int j = gap; j < size; j++) {
+            int temp = arr[j];
+            while (j >= gap && (arr[j - gap] > temp)) {
+                arr[j] = arr[j - gap];
+                j -= gap;
+            }
+            arr[j] = temp;
+        }
+    }
+}
+
+/// <summary>
 /// 
 /// </summary>
 /// <param name="arr"></param>
