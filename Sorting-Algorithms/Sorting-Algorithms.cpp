@@ -240,10 +240,67 @@ void shellSort(int* arr, int size) {
 }
 
 /// <summary>
-/// 
+/// Library sort is an interesting sorting algorithm that works just like an insertion sort; however the main difference
+/// between the insertion and this algorithm is that the library leaves spaces before and after a determined value to further
+/// introduce another value without having to move every single value (just like a librarian would, hence the name).
+/// Its time complexity can be of O(n log n) but it can degenerate quickly in O(n) especially with large arrays
 /// </summary>
-/// <param name="arr"></param>
-/// <param name="size"></param>
-void blockSort(int* arr, int size) {
+/// <param name="Array of ints"></param>
+/// <param name="Size of array"></param> 
+void librarySort(int* arr, int size) {
+    int lsize = size * 2;
+    int* lib = new int[lsize];
 
+    for (int i = 1; i <= floor(log2(size)); i++) {
+        rebalance(lib, 1, pow(2, i - 1));
+        int j = pow(2, i - 1);
+        while (j < pow(2, i) && j < size) {
+            int ins = binarySearch(arr[j], lib, pow(2, i));
+            lib[ins] = arr[j];
+            j++;
+        }
+    }
+
+    for (int i = 0; i < size; i++) {
+        if (lib[i] != ' ' && lib[i] != '\0') {
+            arr[i] = lib[i];
+        }
+        
+    }
+
+    delete[] lib;
+}
+
+void rebalance(int* lib, int begin, int end) {
+    int r = end;
+    int w = end * 2;
+    while (r >= begin) {
+        lib[w] = lib[r];
+        lib[w - 1] = 2;
+        r--;
+        w -= 2;
+    }
+}
+
+/// <summary>
+/// Binary search for library sort
+/// </summary>
+int binarySearch(int value, int* lib, int size) {
+
+    int low = 0;
+    int high = size - 1;
+
+    while (low < high - 1) {
+        int mid = low + (high - low) / 2;
+
+        if (lib[mid] == value) {
+            return mid;
+        }
+        else if (lib[mid] < value) {
+            low = mid + 1;
+        }
+        else {
+            high = mid - 1;
+        }
+    }
 }
