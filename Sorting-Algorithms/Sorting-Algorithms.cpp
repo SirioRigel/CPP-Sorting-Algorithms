@@ -271,6 +271,9 @@ void librarySort(int* arr, int size) {
     delete[] lib;
 }
 
+/// <summary>
+/// The rebalance function is used in library sort
+/// </summary>
 void rebalance(int* lib, int begin, int end) {
     int r = end;
     int w = end * 2;
@@ -301,6 +304,27 @@ int binarySearch(int value, int* lib, int size) {
         }
         else {
             high = mid - 1;
+        }
+    }
+}
+
+/// <summary>
+/// The gnome sort is an interesting sorting algorithm: it's defenetly the least recommended for sorting
+/// large arrays as its time complexity is tipically O(n^2). It's the same technique used by a gnome when sorting
+/// flower pots: if the one on the right is smaller, it swaps them and goes back swapping until all of the previous
+/// are sorted, then it moves on.
+/// </summary>
+/// <param name="arr"></param>
+/// <param name="size"></param>
+void gnomeSort(int* arr, int size) {
+    int pos = 0;
+    while (pos < size) {
+        if (pos == 0 || arr[pos] >= arr[pos - 1]) {
+            pos++;
+        }
+        else {
+            swap(arr[pos], arr[pos - 1]);
+            pos--;
         }
     }
 }
