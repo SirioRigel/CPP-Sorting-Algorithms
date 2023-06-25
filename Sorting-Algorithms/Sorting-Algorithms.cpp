@@ -328,3 +328,39 @@ void gnomeSort(int* arr, int size) {
         }
     }
 }
+
+/// <summary>
+/// The bogo sort, or stupid sort, is a sorting algorithm that works by permutating the initial list of
+/// ints and then checking if they are sorted. this is one of the worst sorting algorithms when it comes to 
+/// time complexity due to the fact the the avarage TC is O(n*n!).
+/// </summary>
+/// <param name="arr"></param>
+/// <param name="size"></param>
+void bogoSort(int* arr, int size) {
+    if (size < 2) return;
+    while (!sorted(arr, size)) {
+        shuffle(arr, size);
+    }
+}
+
+bool sorted(int* arr, int size) {
+    int counter = 0; // until size - 1
+    for (int i = 1; i < size; i++) {
+        if (arr[i] > arr[i - 1]) {
+            counter++;
+        }
+    }
+    if (counter == size - 1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void shuffle(int* arr, int size) {
+    for (int i = 0; i < size; i++) {
+        int rnd = rand() % size;
+        arr[i] = arr[rnd];
+    }
+}
