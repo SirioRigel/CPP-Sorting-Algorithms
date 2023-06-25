@@ -361,6 +361,8 @@ bool sorted(int* arr, int size) {
 void shuffle(int* arr, int size) {
     for (int i = 0; i < size; i++) {
         int rnd = rand() % size;
-        arr[i] = arr[rnd];
+        int temp = arr[rnd];
+        arr[rnd] = arr[i];
+        arr[i] = temp;
     }
 }
