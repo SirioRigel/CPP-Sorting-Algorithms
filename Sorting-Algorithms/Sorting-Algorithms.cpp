@@ -366,3 +366,39 @@ void shuffle(int* arr, int size) {
         arr[i] = temp;
     }
 }
+
+/// <summary>
+/// The cycle sort is a sorting algortihm widely used in embedded systems or EEPROMS as its space complexity is
+/// very low O(n) due to the fact that the items inside the array that has to be sorted are never written elsewhere, limiting the amount
+/// of writing cycles on the disk. This however comes at a cost of more time complexity O(n^2).
+/// </summary>
+/// <param name="Array of ints"></param>
+/// <param name="Size of the array"></param>
+void cycleSort(int* arr, int size) {
+    if (size < 2) return;
+    for (int i = 0; i < size; i++) {
+        int item = arr[i];
+        int pos = i;
+        for (int j = i + 1; j < size; j++) {
+            if (arr[j] < item) pos++;
+        }
+
+        if (pos == i) continue;
+        
+        while (item == arr[i]) {
+            pos++;
+        }
+
+        swap(arr[pos], item);
+        while (pos != i) {
+            pos = i;
+            for (int j = i + 1; j < size; j++) {
+                if (arr[j] < item) pos++;
+            }
+            while (item == arr[pos]) {
+                pos++;
+            }
+            swap(arr[pos], item);
+        }
+    }
+}
