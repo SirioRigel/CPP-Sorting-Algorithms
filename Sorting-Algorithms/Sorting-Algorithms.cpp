@@ -6,6 +6,22 @@
 #include <string.h>
 
 using namespace std;
+void bubbleSort(int*, int);
+void quickSort(int*, int);
+int* quickPartition(int, bool, int, int*);
+void mergeSort(int*, int, int);
+void merge(int*, int, int, int);
+void insertionSort(int*, int);
+void selectionSort(int*, int);
+void shellSort(int*, int);
+void librarySort(int*, int);
+void rebalance(int*, int, int);
+int binarySearch(int, int*, int);
+void gnomeSort(int*, int);
+void bogoSort(int*, int);
+bool sorted(int*, int);
+void shuffle(int*, int);
+void cycleSort(int*, int);
 
 /// <summary>
 /// The bubble sort algorithm is a simple algorithm that works by checking if every element in the list is 
@@ -36,7 +52,7 @@ void bubbleSort(int* arr, int size) {
 /// </summary>
 /// <param name="Array of ints"></param>
 /// <param name="Size of the array"></param>
-void quicksort(int* arr, int size) {
+void quickSort(int* arr, int size) {
     if (size < 2) return;
 
     int pivot = size - 1;
@@ -56,8 +72,8 @@ void quicksort(int* arr, int size) {
             part2 = quickPartition(pivot, false, size, arr);
             size1 = pivot;
             size2 = size - pivot - 1;
-            quicksort(part1, size1);
-            quicksort(part2, size2);
+            quickSort(part1, size1);
+            quickSort(part2, size2);
 
             for (int j = 0; j < size1; j++) {
                 arr[j] = part1[j];
